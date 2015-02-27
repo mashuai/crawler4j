@@ -51,6 +51,9 @@ public class Frontier extends Configurable {
 
   protected Counters counters;
 
+  /*
+    初始化列表，对于可恢复的crawler，需要从统计库中获取上次需要调度的数量。
+  */
   public Frontier(Environment env, CrawlConfig config) {
     super(config);
     this.counters = new Counters(env, config);
@@ -80,7 +83,9 @@ public class Frontier extends Configurable {
       workQueues = null;
     }
   }
-
+    /*
+    将所有的url加入workQueue中，等待访问。
+     */
   public void scheduleAll(List<WebURL> urls) {
     int maxPagesToFetch = config.getMaxPagesToFetch();
     synchronized (mutex) {
@@ -107,6 +112,9 @@ public class Frontier extends Configurable {
     }
   }
 
+    /*
+    将url加入workQueue
+     */
   public void schedule(WebURL url) {
     int maxPagesToFetch = config.getMaxPagesToFetch();
     synchronized (mutex) {
@@ -121,7 +129,10 @@ public class Frontier extends Configurable {
       }
     }
   }
-
+  /*
+    max 表示获取的最多的url，result，返回值
+    TODO：是否应该将result设置为返回值。
+   */
   public void getNextURLs(int max, List<WebURL> result) {
     while (true) {
       synchronized (mutex) {
@@ -159,6 +170,9 @@ public class Frontier extends Configurable {
     }
   }
 
+    /*
+    增加已处理的Counter
+     */
   public void setProcessed(WebURL webURL) {
     counters.increment(Counters.ReservedCounterNames.PROCESSED_PAGES);
     if (inProcessPages != null) {
@@ -167,7 +181,9 @@ public class Frontier extends Configurable {
       }
     }
   }
-
+/*
+    获取队列长度
+ */
   public long getQueueLength() {
     return workQueues.getLength();
   }
