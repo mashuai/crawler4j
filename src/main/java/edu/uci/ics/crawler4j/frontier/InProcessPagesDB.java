@@ -36,6 +36,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
  * It is used for resuming a previous crawl.
  *
  * @author Yasser Ganjisaffar
+ * 待处理的URL
  */
 public class InProcessPagesDB extends WorkQueues {
 

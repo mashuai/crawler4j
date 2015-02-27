@@ -40,6 +40,8 @@ import edu.uci.ics.crawler4j.util.IO;
  * crawler threads and monitors their progress.
  *
  * @author Yasser Ganjisaffar
+ * CrawlerController 是爬虫的控制类。
+ *
  */
 public class CrawlController extends Configurable {
 

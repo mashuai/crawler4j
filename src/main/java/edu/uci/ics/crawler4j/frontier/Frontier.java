@@ -31,6 +31,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 
 /**
  * @author Yasser Ganjisaffar
+ * URL 调度
  */
 
 public class Frontier extends Configurable {

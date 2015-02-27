@@ -38,6 +38,8 @@ import edu.uci.ics.crawler4j.util.Util;
 
 /**
  * @author Yasser Ganjisaffar
+ * 计数器,记录已抓取和未抓取的URL的数量。
+ * Statistics 数据库
  */
 public class Counters extends Configurable {
   private static final Logger logger = LoggerFactory.getLogger(Counters.class);
