@@ -337,6 +337,7 @@ public class CrawlController extends Configurable {
    * @param docId
    *            the document id that you want to be assigned to this seed URL.
    *
+   * 添加种子URL
    */
   public void addSeed(String pageUrl, int docId) {
     String canonicalUrl = URLCanonicalizer.getCanonicalURL(pageUrl);
