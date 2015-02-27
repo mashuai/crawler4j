@@ -62,6 +62,9 @@ public class WorkQueues {
     webURLBinding = new WebURLTupleBinding();
   }
 
+    /*
+    获取最多max个WebURL
+     */
   public List<WebURL> get(int max) {
     synchronized (mutex) {
       List<WebURL> results = new ArrayList<>(max);
@@ -104,7 +107,9 @@ public class WorkQueues {
       return results;
     }
   }
-
+    /*
+        删除count个url。
+     */
   public void delete(int count) {
     synchronized (mutex) {
 
@@ -154,6 +159,11 @@ public class WorkQueues {
    * numbers are the same, those found at lower depths will be crawled earlier.
    * If depth is also equal, those found earlier (therefore, smaller docid) will
    * be crawled earlier.
+   * WebURL的key
+   * 6字节
+   * 1，优先级，越小优先级越高，如果相同比较第二字节。
+   * 2，深度，是从哪一级获取的，越小优先级越高。如果相同比较剩下的字节
+   * 3-6，docid，越小，优先级越高。
    */
   protected static DatabaseEntry getDatabaseEntryKey(WebURL url) {
     byte[] keyData = new byte[6];
@@ -163,6 +173,9 @@ public class WorkQueues {
     return new DatabaseEntry(keyData);
   }
 
+    /*
+    加入新的URL
+     */
   public void put(WebURL url) {
     DatabaseEntry value = new DatabaseEntry();
     webURLBinding.objectToEntry(url, value);
@@ -179,7 +192,9 @@ public class WorkQueues {
       }
     }
   }
-
+  /*
+  获取urls的长度
+   */
   public long getLength() {
     try {
       return urlsDB.count();

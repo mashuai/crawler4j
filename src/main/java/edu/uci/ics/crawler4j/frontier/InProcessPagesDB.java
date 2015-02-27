@@ -36,7 +36,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
  * It is used for resuming a previous crawl.
  *
  * @author Yasser Ganjisaffar
- * 待处理的URL
+ * 待处理的URL队列。
  */
 public class InProcessPagesDB extends WorkQueues {
 
@@ -49,6 +49,10 @@ public class InProcessPagesDB extends WorkQueues {
       logger.info("Loaded {} URLs that have been in process in the previous crawl.", docCount);
     }
   }
+
+    /*
+        删掉指定url。
+     */
 
   public boolean removeURL(WebURL webUrl) {
     synchronized (mutex) {

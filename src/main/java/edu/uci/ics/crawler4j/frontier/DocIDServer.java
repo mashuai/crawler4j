@@ -33,7 +33,9 @@ import edu.uci.ics.crawler4j.util.Util;
 
 /**
  * @author Yasser Ganjisaffar
- *
+ * 生成URL ID。doc id 从1开始增长。
+ * key:byte url String
+ * value: byte id int
  */
 
 public class DocIDServer extends Configurable {
@@ -69,6 +71,7 @@ public class DocIDServer extends Configurable {
    *
    * @param url the URL for which the docid is returned.
    * @return the docid of the url if it is seen before. Otherwise -1 is returned.
+   * 获取已有URL的id。key:url
    */
   public int getDocId(String url) {
     synchronized (mutex) {
@@ -93,7 +96,9 @@ public class DocIDServer extends Configurable {
       return docID;
     }
   }
-
+  /*
+    生成新URL id。
+  */
   public int getNewDocID(String url) {
 
     synchronized (mutex) {
@@ -114,7 +119,9 @@ public class DocIDServer extends Configurable {
       return docID;
     }
   }
-
+  /*
+    将新生成的url:id 保存到数据库
+     */
   public void addUrlAndDocId(String url, int docId) throws Exception {
     synchronized (mutex) {
       if (docId <= lastDocID) {
@@ -138,7 +145,9 @@ public class DocIDServer extends Configurable {
   public boolean isSeenBefore(String url) {
     return getDocId(url) != -1;
   }
-
+    /*
+    获取最大的id
+     */
   public final int getDocCount() {
     int count = -1;
 

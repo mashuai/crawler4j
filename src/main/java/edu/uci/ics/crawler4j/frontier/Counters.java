@@ -39,11 +39,13 @@ import edu.uci.ics.crawler4j.util.Util;
 /**
  * @author Yasser Ganjisaffar
  * 计数器,记录已抓取和未抓取的URL的数量。
- * Statistics 数据库
  */
 public class Counters extends Configurable {
   private static final Logger logger = LoggerFactory.getLogger(Counters.class);
 
+  /*
+   * 分别表示未抓取和已抓取的name
+  */
   public static class ReservedCounterNames {
     public static final String SCHEDULED_PAGES = "Scheduled-Pages";
     public static final String PROCESSED_PAGES = "Processed-Pages";
@@ -66,6 +68,7 @@ public class Counters extends Configurable {
      * When crawling is set to be resumable, we have to keep the statistics
      * in a transactional database to make sure they are not lost if crawler
      * is crashed or terminated unexpectedly.
+     * 如果爬虫被设置成可恢复的，必须将统计数据保存到支持事务的数据库中，这样如果crawler崩溃就不会丢失统计信息。
      */
     if (config.isResumableCrawling()) {
       DatabaseConfig dbConfig = new DatabaseConfig();
